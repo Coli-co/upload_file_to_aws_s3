@@ -48,8 +48,10 @@ async def upload_image_to_s3(
     try:
         image_data = await upload_image.read()  # binary data
         content_type = upload_image.content_type
+        folder_name = os.getenv("OBJECTS_NAME")
 
-        upload_response = upload_file_to_s3(image_data, "upload-image-by-boto3", f"test-upload-file/{file_name}",
+        upload_response = upload_file_to_s3(image_data, os.getenv("BUCKET_NAME"),
+                                            f"{folder_name}/{file_name}",
                                             content_type)
 
         # # Upload the image to S3
