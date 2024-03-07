@@ -59,6 +59,11 @@ async def upload_image_to_s3(
             return JSONResponse(
                 content={"message": "Image uploaded successfully"}, status_code=200
             )
+
+         # upload image failed
+        return JSONResponse(
+            content={"message": "Error uploading image to S3"}, status_code=500
+        )
     except Exception as e:
         print(f"Error uploading image to S3: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
